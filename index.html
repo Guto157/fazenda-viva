@@ -13,15 +13,25 @@
 .wallet{background:#fff;color:#355b34;padding:8px 12px;border-radius:18px;font-weight:800;white-space:nowrap}
 main{max-width:850px;margin:auto;padding:14px}.welcome{display:flex;justify-content:space-between;align-items:center;margin:2px 2px 12px;gap:8px}
 h1{font-size:20px;margin:0}.level{font-size:12px;color:#54704d}
-.game-wrap{position:relative;background:linear-gradient(180deg,#8bd4f0 0%,#c9edb0 34%,#7fbd60 35%,#5e9d48 100%);border:5px solid #fff;border-radius:22px;overflow:hidden;padding:18px 14px 25px;box-shadow:0 8px 24px #375d2930,inset 0 -12px 0 #477d3b}
-.farm-title{text-align:center;font-weight:900;color:#28572e;margin:0 0 18px;text-shadow:0 1px #ffffffaa}
-.farm-grid{position:relative;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px 12px;max-width:620px;margin:auto;perspective:700px}
-.plot{position:relative;min-height:116px;border:3px solid #a66b3e;border-radius:15px;background:linear-gradient(145deg,#9a6841 0%,#74472e 45%,#583521 100%);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:10px 4px;box-shadow:inset 0 4px 5px #ffffff30,inset 0 -7px 0 #452a1c,0 7px 0 #75452b,0 10px 12px #244d2b55;cursor:pointer;touch-action:manipulation;transform:rotateX(8deg);transition:transform .12s,filter .12s}
-.plot:before{content:"";position:absolute;inset:8px;border-radius:10px;border:2px dashed #c18a59aa;pointer-events:none}
-.plot:active{transform:rotateX(8deg) translateY(4px);filter:brightness(1.08);box-shadow:inset 0 4px 5px #ffffff30,inset 0 -4px 0 #452a1c,0 3px 0 #75452b,0 5px 8px #244d2b55}
-.plot.selected{outline:4px solid #ffe17a;outline-offset:3px;filter:brightness(1.12)}
-.plot .crop{font-size:36px;line-height:1.2;filter:drop-shadow(0 3px 2px #24180f88);z-index:1}.plot .plot-name{font-size:12px;font-weight:900;text-shadow:0 2px 2px #24180f}.plot .plot-state{font-size:11px;color:#fff0d4;text-shadow:0 1px 2px #24180f;z-index:1}
-.plot.ready{background:linear-gradient(145deg,#b28b43 0%,#8d642c 50%,#60431f 100%);border-color:#e7c66d}
+.game-wrap{position:relative;background:linear-gradient(180deg,#82c9ee 0%,#b9e6f2 22%,#a9d987 23%,#75b653 48%,#4f923d 100%);border:5px solid #fff;border-radius:22px;overflow:hidden;padding:0 12px 22px;box-shadow:0 9px 24px #294b263d}
+.scenery{height:190px;position:relative;overflow:hidden;margin:0 -12px;background:linear-gradient(#71c7f0 0 58%,#b6df87 59% 100%)}
+.scenery:before{content:"";position:absolute;left:-5%;right:-5%;bottom:8px;height:75px;background:#6eaa4e;border-radius:50% 50% 0 0;box-shadow:180px -12px 0 -5px #83bb59,440px -5px 0 -8px #609b45}
+.scenery:after{content:"";position:absolute;left:0;right:0;bottom:0;height:38px;background:repeating-linear-gradient(90deg,transparent 0 28px,#9a693b 29px 34px,transparent 35px 62px);border-top:7px solid #b7834c;opacity:.9}
+.sky-cloud{position:absolute;top:20px;left:12%;font-size:32px}
+.farm-house{position:absolute;z-index:1;left:7%;bottom:34px;font-size:95px;line-height:1;filter:drop-shadow(0 8px 4px #284c2a66)}
+.farm-barn{position:absolute;z-index:1;right:7%;bottom:35px;font-size:78px;line-height:1;filter:drop-shadow(0 8px 4px #284c2a66)}
+.farm-tree{position:absolute;z-index:1;left:43%;bottom:38px;font-size:66px;filter:drop-shadow(0 5px 3px #284c2a66)}
+.windmill{position:absolute;z-index:1;right:38%;top:7px;font-size:48px}
+.farm-title{position:relative;z-index:2;text-align:center;font-weight:900;color:#fff;margin:0 -12px;padding:10px;background:linear-gradient(90deg,#477d36,#6cae45,#477d36);text-shadow:0 2px 3px #24431e;box-shadow:0 3px 7px #294b2644}
+.farm-grid{position:relative;z-index:2;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:17px 12px;max-width:650px;margin:20px auto 0;perspective:800px;padding:4px}
+.plot{position:relative;min-height:112px;border:5px solid #9a6338;border-radius:13px;background:radial-gradient(ellipse at 35% 25%,#98633b 0%,#704328 55%,#4f2f1e 100%);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:10px 4px;box-shadow:inset 0 4px 5px #e6b77b55,inset 0 -8px 0 #452819,0 7px 0 #6d452a,0 11px 12px #21451e66;cursor:pointer;touch-action:manipulation;transform:rotateX(12deg);transition:transform .12s,filter .12s}
+.plot:before{content:"";position:absolute;inset:8px;border-radius:7px;border:2px solid #b47c4b;box-shadow:inset 0 0 0 2px #54331f,inset 0 8px 9px #321e1544;pointer-events:none}
+.plot:after{content:"";position:absolute;left:12px;right:12px;top:20px;height:3px;background:#b47c4b88;border-radius:50%;box-shadow:0 22px #b47c4b55,0 44px #b47c4b44;pointer-events:none}
+.plot:active{transform:rotateX(12deg) translateY(4px);filter:brightness(1.1)}
+.plot.selected{outline:4px solid #ffe17a;outline-offset:2px;filter:brightness(1.12)}
+.plot .crop{font-size:37px;line-height:1.2;filter:drop-shadow(0 4px 2px #24180f99);z-index:1}.plot .plot-name{font-size:12px;font-weight:900;text-shadow:0 2px 3px #24180f}.plot .plot-state{font-size:11px;color:#fff0d4;text-shadow:0 1px 2px #24180f;z-index:1}
+.plot.ready{background:radial-gradient(ellipse at 35% 25%,#bd9547 0%,#8d642c 58%,#60431f 100%);border-color:#d8a75c}
+@media(max-width:480px){.scenery{height:155px}.farm-house{font-size:76px}.farm-barn{font-size:62px}.farm-tree{font-size:52px}.windmill{font-size:39px}.farm-grid{gap:14px 8px}.plot{min-height:99px}}
 .seed-picker{margin:15px auto 0;max-width:620px;padding:13px;background:#fff9e9;border:2px solid #f0d18a;border-radius:16px;box-shadow:0 5px 12px #294c2940}
 .seed-picker[hidden]{display:none}
 .seed-picker h3{margin:0 0 9px;font-size:14px;color:#4b6337}
@@ -49,7 +59,7 @@ button.gold{background:#e8b94e;color:#5c4214;box-shadow:0 3px 0 #c99a32}
 <header class="top"><div><div class="brand">🌱 Fazenda Viva</div><div class="sub">SUA TERRA, SUA HISTÓRIA</div></div><div class="wallet">🪙 <span id="coins">100</span></div></header>
 <main>
 <div class="welcome"><div><h1>Minha fazenda</h1><div class="level">Nível 1 · Pequeno agricultor</div></div><div class="hint">☀️ Dia bonito para plantar!</div></div>
-<div class="game-wrap"><div class="farm-title">🌳 Sua plantação 🌳</div><div class="farm-grid" id="farm" aria-label="Canteiros da fazenda"></div><div class="seed-picker" id="seedPicker" hidden><h3>🌱 Escolha o que deseja plantar</h3><button class="seed-option" id="carrotSeed" type="button"><span><span class="seed-emoji">🥕</span> Cenoura<small>1 semente · 30 segundos para crescer</small></span><span id="carrotSeedStock">5 disponíveis</span></button></div></div>
+<div class="game-wrap"><div class="scenery" aria-hidden="true"><span class="sky-cloud">☁️</span><span class="farm-house">🏡</span><span class="windmill">🌬️</span><span class="farm-tree">🌳</span><span class="farm-barn">🏚️</span></div><div class="farm-title">🌻 Sua fazenda 🌻</div><div class="farm-grid" id="farm" aria-label="Canteiros da fazenda"></div><div class="seed-picker" id="seedPicker" hidden><h3>🌱 Escolha o que deseja plantar</h3><button class="seed-option" id="carrotSeed" type="button"><span><span class="seed-emoji">🥕</span> Cenoura<small>1 semente · 30 segundos para crescer</small></span><span id="carrotSeedStock">5 disponíveis</span></button></div></div>
 <section class="panel">
 <div class="panel-head"><h2>🌾 Cuide da plantação</h2><span class="hint" id="selected">Selecione um canteiro</span></div>
 <div class="actions"><button class="action" id="plant" disabled>🥕 Plantar<br>10 moedas</button><button class="action gold" id="harvest" disabled>🧺 Colher</button><button class="action secondary" id="clear" disabled>🪴 Limpar</button></div><button class="seed-shop" id="buySeeds">🌱 Comprar 5 sementes · 25 moedas</button>
@@ -78,8 +88,8 @@ if(ready)p.state='ready';
 const button=document.createElement('button');
 button.type='button';button.className='plot'+(selected===i?' selected':'')+(ready?' ready':'');
 button.setAttribute('aria-label','Canteiro '+(i+1)+', '+(ready?'cenoura pronta':p.state==='growing'?'cenoura crescendo':'vazio'));
-const icon=p.state==='empty'?'🟫':ready?'🥕':'🌱';
-const state=p.state==='empty'?'Vazio':ready?'Pronta para colher':'Falta '+formatTime(p.readyAt-Date.now());
+const icon=p.state==='empty'?'':ready?'🥕':'🌱';
+const state=p.state==='empty'?'Toque para plantar':ready?'Pronta para colher':'Falta '+formatTime(p.readyAt-Date.now());
 button.innerHTML='<span class="crop">'+icon+'</span><span class="plot-name">Canteiro '+(i+1)+'</span><span class="plot-state">'+state+'</span>';
 button.addEventListener('click',()=>{selected=i;const current=data.plots[i];if(current.state==='ready'||isReady(current)){harvestPlot(i);return}if(current.state==='empty'){openSeedPicker(i);return}$('seedPicker').hidden=true;$('status').textContent='A cenoura está crescendo. Falta '+formatTime(current.readyAt-Date.now())+'.';refresh()});
 $('farm').appendChild(button);
