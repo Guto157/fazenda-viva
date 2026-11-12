@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#477f45">
+<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
 <title>Fazenda Viva</title>
 <style>
 :root{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;color:#29432b;background:#e9f2df}
@@ -14,7 +15,7 @@
 main{max-width:850px;margin:auto;padding:14px}.welcome{display:flex;justify-content:space-between;align-items:center;margin:2px 2px 12px;gap:8px}
 h1{font-size:20px;margin:0}.level{font-size:12px;color:#54704d}
 .game-wrap{position:relative;background:#548b45;border:5px solid #f4e7c9;border-radius:22px;overflow:hidden;padding:0 12px 22px;box-shadow:0 12px 28px #294b2655,inset 0 0 0 2px #ffffff55}
-.scenery{height:310px;position:relative;overflow:hidden;margin:0 -12px;background:#83b967 url("assets/farm-scene.svg") center 54%/cover no-repeat;box-shadow:inset 0 -18px 22px #254d2b44}
+.farm-3d{display:block;width:calc(100% + 24px);height:350px;margin:0 -12px;background:radial-gradient(ellipse at 50% 45%,#d7e7c2 0%,#8eb86c 65%,#477b3e 100%);--poster-color:transparent}
 .farm-title{position:relative;z-index:2;text-align:center;font-weight:900;color:#fff;margin:0 -12px;padding:10px;background:linear-gradient(90deg,#477d36,#6cae45,#477d36);text-shadow:0 2px 3px #24431e;box-shadow:0 3px 7px #294b2644}
 .farm-grid{position:relative;z-index:2;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:17px 12px;max-width:650px;margin:20px auto 0;perspective:900px;padding:4px}
 .plot{position:relative;min-height:112px;border:5px solid #a87848;border-radius:12px;background:repeating-linear-gradient(0deg,transparent 0 15px,#4a2d1b55 16px 18px),linear-gradient(145deg,#a9794b,#694329 55%,#422b1c);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:10px 4px;box-shadow:inset 0 3px 5px #f0c58a66,inset 0 -7px 0 #382317,0 8px 0 #68432b,0 13px 16px #183b1d77;cursor:pointer;touch-action:manipulation;transform:rotateX(20deg);transition:transform .12s,filter .12s}
@@ -24,7 +25,7 @@ h1{font-size:20px;margin:0}.level{font-size:12px;color:#54704d}
 .plot.selected{outline:4px solid #ffe17a;outline-offset:2px;filter:brightness(1.12)}
 .plot .crop{width:38px;height:42px;display:block;filter:drop-shadow(0 4px 2px #24180f99);z-index:1}.plot .crop svg{width:100%;height:100%;overflow:visible}.plot .plot-name{font-size:12px;font-weight:900;text-shadow:0 2px 3px #24180f}.plot .plot-state{font-size:11px;color:#fff0d4;text-shadow:0 1px 2px #24180f;z-index:1}
 .plot.ready{background:radial-gradient(ellipse at 35% 25%,#bd9547 0%,#8d642c 58%,#60431f 100%);border-color:#d8a75c}
-@media(max-width:480px){.scenery{height:235px}.farm-grid{gap:14px 8px}.plot{min-height:99px}}
+@media(max-width:480px){.farm-3d{height:290px}.farm-grid{gap:14px 8px}.plot{min-height:99px}}
 .seed-picker{margin:15px auto 0;max-width:620px;padding:13px;background:#fff9e9;border:2px solid #f0d18a;border-radius:16px;box-shadow:0 5px 12px #294c2940}
 .seed-picker[hidden]{display:none}
 .seed-picker h3{margin:0 0 9px;font-size:14px;color:#4b6337}
@@ -52,7 +53,7 @@ button.gold{background:#e8b94e;color:#5c4214;box-shadow:0 3px 0 #c99a32}
 <header class="top"><div><div class="brand">🌱 Fazenda Viva</div><div class="sub">SUA TERRA, SUA HISTÓRIA</div></div><div class="wallet">🪙 <span id="coins">100</span></div></header>
 <main>
 <div class="welcome"><div><h1>Minha fazenda</h1><div class="level">Nível 1 · Pequeno agricultor</div></div><div class="hint">☀️ Dia bonito para plantar!</div></div>
-<div class="game-wrap"><div class="scenery" role="img" aria-label="Paisagem de uma fazenda com casa, celeiro, moinho, árvores e lago"></div><div class="farm-title">🌻 Sua fazenda 🌻</div><div class="farm-grid" id="farm" aria-label="Canteiros da fazenda"></div><div class="seed-picker" id="seedPicker" hidden><h3>🌱 Escolha o que deseja plantar</h3><button class="seed-option" id="carrotSeed" type="button"><span><span class="seed-emoji">🥕</span> Cenoura<small>1 semente · 30 segundos para crescer</small></span><span id="carrotSeedStock">5 disponíveis</span></button></div></div>
+<div class="game-wrap"><model-viewer class="farm-3d" src="https://cdn.3dassets.dev/assets/29167/v1/model.glb" alt="Fazenda 3D com construções, plantações, animais e equipamentos" camera-controls touch-action="pan-y" auto-rotate rotation-per-second="5deg" shadow-intensity="1" exposure="1.15" environment-image="neutral" loading="eager" interaction-prompt="none"></model-viewer><div class="farm-title">🌻 Sua fazenda 🌻</div><div class="farm-grid" id="farm" aria-label="Canteiros da fazenda"></div><div class="seed-picker" id="seedPicker" hidden><h3>🌱 Escolha o que deseja plantar</h3><button class="seed-option" id="carrotSeed" type="button"><span><span class="seed-emoji">🥕</span> Cenoura<small>1 semente · 30 segundos para crescer</small></span><span id="carrotSeedStock">5 disponíveis</span></button></div></div>
 <section class="panel">
 <div class="panel-head"><h2>🌾 Cuide da plantação</h2><span class="hint" id="selected">Selecione um canteiro</span></div>
 <div class="actions"><button class="action" id="plant" disabled>🥕 Plantar<br>10 moedas</button><button class="action gold" id="harvest" disabled>🧺 Colher</button><button class="action secondary" id="clear" disabled>🪴 Limpar</button></div><button class="seed-shop" id="buySeeds">🌱 Comprar 5 sementes · 25 moedas</button>
