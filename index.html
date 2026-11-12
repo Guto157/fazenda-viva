@@ -29,6 +29,7 @@ button.action{border:0;border-radius:13px;padding:12px 8px;font-weight:800;font-
 button.action:disabled{opacity:.45;cursor:not-allowed;box-shadow:none}
 button.secondary{background:#e7efd9;color:#3c6337;box-shadow:0 3px 0 #c9d9b8}
 button.gold{background:#e8b94e;color:#5c4214;box-shadow:0 3px 0 #c99a32}
+.seed-shop{width:100%;margin-top:10px;border:0;border-radius:13px;padding:12px 8px;font-weight:800;font-size:13px;background:#e8b94e;color:#5c4214;cursor:pointer;box-shadow:0 3px 0 #c99a32;touch-action:manipulation}.seed-shop:disabled{opacity:.45;cursor:not-allowed;box-shadow:none}
 .status{min-height:24px;font-size:13px;color:#55734a;margin-top:10px;text-align:center}
 .inventory{display:flex;gap:8px;flex-wrap:wrap}.chip{background:#edf4e5;border-radius:12px;padding:8px 10px;font-size:12px;font-weight:700;color:#466640}
 .footer{text-align:center;color:#74816b;font-size:11px;padding:16px}
@@ -42,7 +43,7 @@ button.gold{background:#e8b94e;color:#5c4214;box-shadow:0 3px 0 #c99a32}
 <div class="game-wrap"><div class="farm-title">🌳 Escolha um canteiro para cuidar 🌳</div><div class="farm-grid" id="farm" aria-label="Canteiros da fazenda"></div></div>
 <section class="panel">
 <div class="panel-head"><h2>🌾 Cuide da plantação</h2><span class="hint" id="selected">Selecione um canteiro</span></div>
-<div class="actions"><button class="action" id="plant" disabled>🥕 Plantar<br>10 moedas</button><button class="action gold" id="harvest" disabled>🧺 Colher</button><button class="action secondary" id="clear" disabled>🪴 Limpar</button></div>
+<div class="actions"><button class="action" id="plant" disabled>🥕 Plantar<br>10 moedas</button><button class="action gold" id="harvest" disabled>🧺 Colher</button><button class="action secondary" id="clear" disabled>🪴 Limpar</button></div><button class="seed-shop" id="buySeeds">🌱 Comprar 5 sementes · 25 moedas</button>
 <div class="status" id="status" role="status" aria-live="polite">Toque em um dos canteiros para começar.</div>
 </section>
 <section class="panel"><div class="panel-head"><h2>🎒 Meu celeiro</h2><span class="hint">Seus recursos</span></div><div class="inventory"><div class="chip">🥕 Cenouras: <span id="carrots">0</span></div><div class="chip">🌱 Sementes: <span id="seeds">5</span></div><div class="chip">🧱 Terrenos: 6</div></div></section>
@@ -82,8 +83,13 @@ const p=data.plots[selected];
 $('plant').disabled=!p||p.state!=='empty'||data.seeds<1||data.coins<10;
 $('harvest').disabled=!p||!(p.state==='ready'||isReady(p));
 $('clear').disabled=!p||p.state==='empty';
+$('buySeeds').disabled=data.coins<25;
 renderFarm();
 }
+$('buySeeds').addEventListener('click',()=>{
+if(data.coins<25){$('status').textContent='Você precisa de 25 moedas para comprar sementes.';return}
+data.coins-=25;data.seeds+=5;save();$('status').textContent='Compra realizada! Você recebeu 5 sementes.';refresh();
+});
 $('plant').addEventListener('click',()=>{
 const p=data.plots[selected];if(!p||p.state!=='empty'||data.seeds<1||data.coins<10)return;
 data.coins-=10;data.seeds--;p.state='growing';p.readyAt=Date.now()+30000;save();
