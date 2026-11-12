@@ -59,6 +59,7 @@ let selected=-1;
 const $=id=>document.getElementById(id);
 const save=()=>{try{localStorage.setItem(SAVE_KEY,JSON.stringify(data))}catch{}};
 const isReady=p=>p.state==='growing'&&Date.now()>=p.readyAt;
+const formatTime=ms=>{const seconds=Math.max(0,Math.ceil(ms/1000));return String(Math.floor(seconds/60)).padStart(2,'0')+':'+String(seconds%60).padStart(2,'0')};
 function renderFarm(){
 $('farm').innerHTML='';
 data.plots.forEach((p,i)=>{
@@ -68,7 +69,7 @@ const button=document.createElement('button');
 button.type='button';button.className='plot'+(selected===i?' selected':'')+(ready?' ready':'');
 button.setAttribute('aria-label','Canteiro '+(i+1)+', '+(ready?'cenoura pronta':p.state==='growing'?'cenoura crescendo':'vazio'));
 const icon=p.state==='empty'?'🟫':ready?'🥕':'🌱';
-const state=p.state==='empty'?'Vazio':ready?'Pronta para colher':'Crescendo';
+const state=p.state==='empty'?'Vazio':ready?'Pronta para colher':'Falta '+formatTime(p.readyAt-Date.now());
 button.innerHTML='<span class="crop">'+icon+'</span><span class="plot-name">Canteiro '+(i+1)+'</span><span class="plot-state">'+state+'</span>';
 button.addEventListener('click',()=>{selected=i;$('status').textContent='Canteiro '+(i+1)+' selecionado.';refresh()});
 $('farm').appendChild(button);
@@ -98,7 +99,7 @@ $('clear').addEventListener('click',()=>{
 const p=data.plots[selected];if(!p)return;p.state='empty';p.readyAt=0;save();
 $('status').textContent='Canteiro liberado.';refresh();
 });
-setInterval(()=>{let changed=false;data.plots.forEach(p=>{if(isReady(p)){p.state='ready';changed=true}});if(changed){save();refresh()}},1000);
+setInterval(()=>{let changed=false;data.plots.forEach(p=>{if(isReady(p)){p.state='ready';changed=true}});if(changed)save();if(data.plots.some(p=>p.state==='growing'||p.state==='ready'))refresh()},1000);
 refresh();
 })();
 </script>
